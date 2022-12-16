@@ -8,16 +8,16 @@ void main(List<String> args) {
 }
 
 counter(int n) {
-  var list = [n];
+  var list = [];
 
-  for (int i = 0; i < list.length; i++) {
+  for (int i = 0; i < n; i++) {
     stdout.write("Enter value at index [$i] = ");
-    list[i] = int.parse(stdin.readLineSync()!);
+    list.add(int.parse(stdin.readLineSync()!));
   }
 
   int oddCount = 0, evenCount = 0, zero = 0;
 
-  for (int i = 0; i < list.length - 1; i++) {
+  for (int i = 0; i < list.length; i++) {
     if (list[i] == 0) {
       zero++;
     } else if (list[i] % 2 == 0) {
