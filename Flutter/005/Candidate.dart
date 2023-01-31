@@ -34,8 +34,8 @@ void main(List<String> args) {
 }
 
 class Candidate {
-  String? candidate_id, candidate_name, candidate_age;
-  double? candidate_weight, candidate_height;
+  // String? candidate_id, candidate_name, candidate_age;
+  // double? candidate_weight, candidate_height;
 
   menu() {
     print(
@@ -66,6 +66,7 @@ class Candidate {
   // Display Details
 
   void displayCandidateDetails() {
+    print(userList);
     if (userList.isEmpty) {
       print("Candidate List is Empty.");
     } else {

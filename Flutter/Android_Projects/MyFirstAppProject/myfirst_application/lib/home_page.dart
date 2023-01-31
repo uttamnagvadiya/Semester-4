@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 
-class home_page extends StatefulWidget{
+class HomePage extends StatefulWidget{
   @override
-  State<home_page> createState() => _home_pageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _home_pageState extends State<home_page> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("My First Application",
+          title: const Text("My First Application",
             style: TextStyle(
               color: Colors.white,
               fontSize: 25,
             ),
           ),
         ),
-        body: Row(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+
             Expanded(
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -31,7 +32,6 @@ class _home_pageState extends State<home_page> {
                     child: Container(
                       color: Colors.green,
                     ),
-                    flex: 2,
                   ),
                   Expanded(
                     child: Container(
@@ -43,11 +43,18 @@ class _home_pageState extends State<home_page> {
                       color: Colors.amber,
                     ),
                   ),
+                  Expanded(
+                    child: Container(
+                      color: Colors.pink,
+                    ),
+                  ),
                 ],
               ),
             ),
+
+
             Expanded(
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -58,9 +65,44 @@ class _home_pageState extends State<home_page> {
                   ),
                   Expanded(
                     child: Container(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.purpleAccent,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.teal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.brown,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.greenAccent,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       color: Colors.white54,
                     ),
-                    flex: 2,
                   ),
                   Expanded(
                     child: Container(
@@ -70,13 +112,74 @@ class _home_pageState extends State<home_page> {
                 ],
               ),
             ),
+
+
             Expanded(
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
                     child: Container(
+                      child: Column(
+                        children: [
+                          Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      child: Column(
+                                        children: [
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    color: Colors.green,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    color: Colors.greenAccent,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Container(
+                                                    color: Colors.lightGreenAccent,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                          ),
+                          Expanded(
+                              child: Row()
+                          ),
+                        ],
+                      ),
                       color: Colors.purpleAccent,
                     ),
                   ),
@@ -87,13 +190,85 @@ class _home_pageState extends State<home_page> {
                   ),
                   Expanded(
                     child: Container(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.lightGreen,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    color: Colors.blueAccent,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  color: Colors.pink,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Container(
+                                                  color: Colors.lightGreenAccent,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    color: Colors.amber,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                       color: Colors.tealAccent,
                     ),
-                    flex: 2,
                   ),
                 ],
               ),
             ),
+
           ],
         ),
       ),
