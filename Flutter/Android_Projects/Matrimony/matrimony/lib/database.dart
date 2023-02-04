@@ -36,6 +36,7 @@ class MatrimonyDatabase{
         await db.rawQuery("SELECT * FROM UsersList");
     for (int i=0; i<data.length; i++) {
       NewUserModel model = NewUserModel();
+      model.UserID = data[i]['UserID'] as int;
       model.Username = data[i]['Username'].toString();
       model.Age = data[i]['Age'] as int;
       model.City = data[i]['City'].toString();
