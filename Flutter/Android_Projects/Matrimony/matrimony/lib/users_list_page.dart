@@ -83,7 +83,7 @@ class _UsersListPageState extends State<UsersListPage> {
                           );
                         },
                         child: Text(
-                          snapshot.data![index].Username.toString(),
+                          searchList[index].Username.toString(),
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
@@ -102,7 +102,7 @@ class _UsersListPageState extends State<UsersListPage> {
                     ),
                   );
                 },
-                itemCount: snapshot.data!.length,
+                itemCount: searchList.length,
               );
             } else {
               return const Center(
@@ -145,10 +145,11 @@ class _UsersListPageState extends State<UsersListPage> {
                 // print("${deletedUserID}\n${searchList[deletedUserID].UserID}");
                 // print(":::3");
                 searchList.removeAt(deletedUserID-1);
-                Navigator.of(context).pop();
                 setState(() {
 
                 });
+                Navigator.of(context).pop();
+
               },
             ),
             TextButton(
