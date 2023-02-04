@@ -92,7 +92,9 @@ class _UsersListPageState extends State<UsersListPage> {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          deleteAlertDialogBox(index);
+                          print(":::1:::");
+                          deleteAlertDialogBox(searchList[index].UserID);
+                          print(":::1:::");
                         },
                         icon: Icon(Icons.delete_rounded),
                         color: Colors.red,
@@ -136,8 +138,12 @@ class _UsersListPageState extends State<UsersListPage> {
           actions: [
             TextButton(
               child: Text('Yes', style: TextStyle(fontWeight: FontWeight.w600),),
-              onPressed: () {
-                int deletedUserID = await db.getDataFromUserTable(localList[index].UserID);
+              onPressed: () async {
+                print(":::1");
+                int deletedUserID = searchList[index].UserID;
+                print(":::2");
+                print(deletedUserID);
+                print(":::3");
                 Navigator.of(context).pop();
               },
             ),
