@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:matrimony/Model/new_user_model.dart';
 import 'package:matrimony/database.dart';
+import 'package:matrimony/new_user.dart';
 import 'package:matrimony/user_details_page.dart';
 
 class UsersListPage extends StatefulWidget {
@@ -10,10 +12,18 @@ class UsersListPage extends StatefulWidget {
 }
 
 class _UsersListPageState extends State<UsersListPage> {
+
+  MatrimonyDatabase db = MatrimonyDatabase();
+  List<NewUserModel> localList = [];
+  List<NewUserModel> searchList = [];
+  bool isGetData = true;
+
   @override
   void initState() {
     super.initState();
-    MatrimonyDatabase().copyPasteAssetFileToRoot();
+    MatrimonyDatabase().copyPasteAssetFileToRoot().then((value) {
+      MatrimonyDatabase().getDataFromUserTable();
+    });
   }
 
   @override
@@ -22,35 +32,70 @@ class _UsersListPageState extends State<UsersListPage> {
       child: Scaffold(
         backgroundColor: Colors.black38,
         appBar: AppBar(
-          title: Text("App Bar."),
+          backgroundColor: Colors.black38,
+          title: Text("Profiles"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return NewUser();
+                      },
+                  ),
+                );
+              },
+              icon: Icon(Icons.add),
+            ),
+          ],
         ),
-        body: FutureBuilder<List<Map<String, Object?>>>(
+        body: FutureBuilder<List<NewUserModel>>(
           builder: (context, snapshot) {
             if (snapshot != null && snapshot.hasData) {
+              if (isGetData) {
+                localList.addAll(snapshot.data!);
+                searchList.addAll(localList);
+              }
+              isGetData = false;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return UserDetailsPage();
-                          },
+                  return Card(
+                    shadowColor: Colors.white,
+                    elevation: 7,
+                    margin: EdgeInsets.only(bottom: 3.5),
+                    child: ListTile(
+                      minLeadingWidth: 50,
+                      tileColor: const Color(0xff9272727),
+                      contentPadding: EdgeInsets.all(5),
+                      leading: const CircleAvatar(
+                        backgroundImage: AssetImage(
+                          "assets/images/nobita.jfif"
                         ),
-                      );
-                    },
-                    child: Card(
-                      color: Color(0xff63636361),
-                      margin: EdgeInsets.all(8),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                      ),
+                      title: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const UserDetailsPage();
+                              },
                             ),
-                            child: Image.asset(snapshot.data![index]['UserImage'].toString(),),
+                          );
+                        },
+                        child: Text(
+                          snapshot.data![index].Username.toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                           ),
-                        ],
+                        ),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          deleteAlertDialogBox(index);
+                        },
+                        icon: Icon(Icons.delete_rounded),
+                        color: Colors.red,
                       ),
                     ),
                   );
@@ -65,10 +110,46 @@ class _UsersListPageState extends State<UsersListPage> {
               );
             }
           },
-          future: MatrimonyDatabase().getDataFromUserTable(),
+          future: isGetData ? db.getDataFromUserTable() : null,
         ),
       ),
     );
   }
+
+
+  Future<void> deleteAlertDialogBox(index) async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+
+          title: Row(
+            children: const [
+              Icon(
+                Icons.delete_rounded,
+                color: Colors.red,
+              ),
+              Text('Alert', style: TextStyle(fontWeight: FontWeight.bold),),
+            ],
+          ),
+          content: Text("Are you sure want to delete."),
+          actions: [
+            TextButton(
+              child: Text('Yes', style: TextStyle(fontWeight: FontWeight.w600),),
+              onPressed: () {
+                int deletedUserID = await db.getDataFromUserTable(localList[index].UserID);
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('No', style: TextStyle(fontWeight: FontWeight.w600),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
-// Text(snapshot.data![index]["Username"].toString(), style: TextStyle(color: Colors.white)

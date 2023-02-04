@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:matrimony/Model/new_user_model.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -28,10 +29,19 @@ class MatrimonyDatabase{
     }
   }
 
-  Future<List<Map<String, Object?>>> getDataFromUserTable () async {
+  Future<List<NewUserModel>> getDataFromUserTable () async {
+    List<NewUserModel> userModelList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
         await db.rawQuery("SELECT * FROM UsersList");
-    return data;
+    for (int i=0; i<data.length; i++) {
+      NewUserModel model = NewUserModel();
+      model.Username = data[i]['Username'].toString();
+      model.Age = data[i]['Age'] as int;
+      model.City = data[i]['City'].toString();
+      
+      userModelList.add(model);
+    }
+    return userModelList;
   }
 }

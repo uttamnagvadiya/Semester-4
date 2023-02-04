@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:matrimony/new_user.dart';
 import 'package:matrimony/user_home_page.dart';
+import 'package:matrimony/users_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  UserHomePage(),
+      home:  UsersListPage(),
     );
   }
 }
