@@ -138,13 +138,17 @@ class _UsersListPageState extends State<UsersListPage> {
           actions: [
             TextButton(
               child: Text('Yes', style: TextStyle(fontWeight: FontWeight.w600),),
-              onPressed: () async {
-                print(":::1");
+              onPressed: () {
+                // print(":::1");
                 int deletedUserID = index;
-                print(":::2");
-                print("${deletedUserID}\n${searchList[deletedUserID].UserID}");
-                print(":::3");
+                // print(":::2");
+                // print("${deletedUserID}\n${searchList[deletedUserID].UserID}");
+                // print(":::3");
+                searchList.removeAt(deletedUserID-1);
                 Navigator.of(context).pop();
+                setState(() {
+
+                });
               },
             ),
             TextButton(
