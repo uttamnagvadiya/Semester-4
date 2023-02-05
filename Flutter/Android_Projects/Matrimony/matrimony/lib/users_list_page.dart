@@ -52,10 +52,12 @@ class _UsersListPageState extends State<UsersListPage> {
                     },
                   ),
                 ).then((value) {
-                  setState(() {
+                    localList.clear();
+                    searchList.clear();
                     isGetData = true;
-                  });
-                },);
+                    setState(() {});
+                  },
+                );
               },
               icon: const Icon(Icons.add),
             ),
@@ -106,6 +108,8 @@ class _UsersListPageState extends State<UsersListPage> {
                             Icons.search,
                             color: Colors.white,
                           ),
+                          hintText: "Search here...",
+                          hintStyle: TextStyle(color: Colors.white54),
                           border: InputBorder.none),
                     ),
                   ),
