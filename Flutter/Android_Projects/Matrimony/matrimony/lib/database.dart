@@ -5,8 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-class MatrimonyDatabase{
-
+class MatrimonyDatabase {
   Future<Database> initDatabase() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String databasePath = join(appDocDir.path, 'matrimony.db');
@@ -22,27 +21,39 @@ class MatrimonyDatabase{
 
     if (FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound) {
       ByteData data =
-      await rootBundle.load(join('assets/database','matrimony.db'));
+          await rootBundle.load(join('assets/database', 'matrimony.db'));
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await new File(path).writeAsBytes(bytes);
     }
   }
 
-  Future<List<NewUserModel>> getDataFromUserTable () async {
+  Future<List<NewUserModel>> getDataFromUserTable() async {
     List<NewUserModel> userModelList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
         await db.rawQuery("SELECT * FROM UsersList");
-    for (int i=0; i<data.length; i++) {
+    for (int i = 0; i < data.length; i++) {
       NewUserModel model = NewUserModel();
       model.UserID = data[i]['UserID'] as int;
       model.Username = data[i]['Username'].toString();
       model.Age = data[i]['Age'] as int;
       model.City = data[i]['City'].toString();
-      
+
       userModelList.add(model);
     }
     return userModelList;
+  }
+
+  Future<int> deleteDataFromUserTable(userID) async {
+    Database db = await initDatabase();
+    int deletedID =
+        await db.delete(
+            'UsersList',
+            where: 'UserID = ?',
+            whereArgs: [userID]
+        );
+
+    return deletedID;
   }
 }

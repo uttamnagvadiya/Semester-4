@@ -21,9 +21,7 @@ class _UsersListPageState extends State<UsersListPage> {
   @override
   void initState() {
     super.initState();
-    MatrimonyDatabase().copyPasteAssetFileToRoot().then((value) {
-      MatrimonyDatabase().getDataFromUserTable();
-    });
+    MatrimonyDatabase().copyPasteAssetFileToRoot();
   }
 
   @override
@@ -92,9 +90,15 @@ class _UsersListPageState extends State<UsersListPage> {
                       ),
                       trailing: IconButton(
                         onPressed: () {
-                          print(":::11:::");
+                          // int deletedID =
+                          //     searchList![index].UserID;
+                          // if (deletedID > 0) {
+                          //   searchList.removeAt(index);
+                          // }
+
+                          print("::1");
                           deleteAlertDialogBox(index);
-                          print(":::22:::");
+                          print("::2");
                         },
                         icon: Icon(Icons.delete_rounded),
                         color: Colors.red,
@@ -124,7 +128,6 @@ class _UsersListPageState extends State<UsersListPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-
           title: Row(
             children: const [
               Icon(
@@ -138,18 +141,28 @@ class _UsersListPageState extends State<UsersListPage> {
           actions: [
             TextButton(
               child: Text('Yes', style: TextStyle(fontWeight: FontWeight.w600),),
-              onPressed: () {
-                // print(":::1");
-                int deletedUserID = index;
-                // print(":::2");
-                // print("${deletedUserID}\n${searchList[deletedUserID].UserID}");
-                // print(":::3");
-                searchList.removeAt(deletedUserID-1);
+              onPressed: () async {
+                print("::4");
+                // int deletedUserID = await db.deleteDataFromUserTable(localList[index].UserID);
+                // print("::5");
+                // if (deletedUserID > 0) {
+                //   print("::6");
+                //     searchList.removeAt(deletedUserID);
+                //   print("::7");
+                // }
+                // Navigator.of(context).pop();
+                int deletedUserID =
+                await db.deleteDataFromUserTable(localList[index].UserID);
+                if (deletedUserID > 0) {
+                  localList.removeAt(index);
+                }
+                Navigator.pop();
                 setState(() {
-
+                  
                 });
-                Navigator.of(context).pop();
 
+
+                print("::8");
               },
             ),
             TextButton(
