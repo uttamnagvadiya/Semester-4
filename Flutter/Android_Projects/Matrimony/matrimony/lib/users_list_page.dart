@@ -1,8 +1,11 @@
+
+//region Imports Statements
 import 'package:flutter/material.dart';
 import 'package:matrimony/Model/new_user_model.dart';
 import 'package:matrimony/database.dart';
 import 'package:matrimony/new_user.dart';
 import 'package:matrimony/user_details_page.dart';
+//endregion
 
 class UsersListPage extends StatefulWidget {
   const UsersListPage({Key? key}) : super(key: key);
@@ -13,10 +16,13 @@ class UsersListPage extends StatefulWidget {
 
 class _UsersListPageState extends State<UsersListPage> {
 
+  //region Variable Declaration
   MatrimonyDatabase db = MatrimonyDatabase();
   List<NewUserModel> localList = [];
   List<NewUserModel> searchList = [];
   bool isGetData = true;
+  var _searchController = TextEditingController();
+  //endregion
 
   @override
   void initState() {
@@ -28,101 +34,157 @@ class _UsersListPageState extends State<UsersListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black38,
+        backgroundColor: Color(0x42424040),
+
+        //region App Bar
         appBar: AppBar(
-          backgroundColor: Colors.black38,
-          title: Text("Profiles"),
+          backgroundColor: Color(0x42424040),
+          title: const Text("Profiles"),
           actions: [
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) {
-                        return NewUser();
-                      },
+                    builder: (context) {
+                      return NewUser(
+                        model: null,
+                      );
+                    },
                   ),
-                );
+                ).then((value) {
+                  setState(() {
+                    isGetData = true;
+                  });
+                },);
               },
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
             ),
           ],
         ),
+        //endregion
+
+        //region Body
         body: FutureBuilder<List<NewUserModel>>(
           builder: (context, snapshot) {
-            if (snapshot != null && snapshot.hasData) {
+            if (snapshot != null &&
+                snapshot.hasData &&
+                snapshot.connectionState != ConnectionState.waiting) {
               if (isGetData) {
                 localList.addAll(snapshot.data!);
                 searchList.addAll(localList);
               }
               isGetData = false;
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return Card(
-                    shadowColor: Colors.white,
-                    elevation: 7,
-                    margin: EdgeInsets.only(bottom: 3.5),
-                    child: ListTile(
-                      minLeadingWidth: 50,
-                      tileColor: const Color(0xff9272727),
-                      contentPadding: EdgeInsets.all(5),
-                      leading: const CircleAvatar(
-                        backgroundImage: AssetImage(
-                          "assets/images/nobita.jfif"
-                        ),
-                      ),
-                      title: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return const UserDetailsPage();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          searchList[index].Username.toString(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          // int deletedID =
-                          //     searchList![index].UserID;
-                          // if (deletedID > 0) {
-                          //   searchList.removeAt(index);
-                          // }
-
-                          print("::1");
-                          deleteAlertDialogBox(index);
-                          print("::2");
-                        },
-                        icon: Icon(Icons.delete_rounded),
-                        color: Colors.red,
-                      ),
+              return Column(
+                children: [
+                  //region Search Bar
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
+                    decoration: BoxDecoration(
+                      color: Color(0x92434242),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  );
-                },
-                itemCount: searchList.length,
+                    child: TextFormField(
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      controller: _searchController,
+                      onChanged: (value) {
+                        searchList.clear();
+                        for (int i = 0; i < localList.length; i++) {
+                          if (localList[i]
+                              .Username
+                              .toLowerCase()
+                              .contains(value.toLowerCase())) {
+                            searchList.add(localList[i]);
+                          }
+                        }
+                        setState(() {});
+                      },
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Colors.white,
+                          ),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                  //endregion
+
+                  //region User List
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          minLeadingWidth: 50,
+                          contentPadding: const EdgeInsets.all(0),
+                          leading: const CircleAvatar(
+                            backgroundImage:
+                                AssetImage("assets/images/nobita.jfif"),
+                          ),
+                          title: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return UserDetailsPage(
+                                        detailsMap: snapshot.data![index]);
+                                  },
+                                ),
+                              );
+                            },
+                            child: Text(
+                              searchList[index].Username.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              deleteAlertDialogBox(index);
+                            },
+                            icon: Icon(Icons.delete_rounded),
+                            color: Colors.red,
+                          ),
+                          horizontalTitleGap: 20,
+                        );
+                      },
+
+                      itemCount: searchList.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          height: 20,
+                          thickness: 1,
+                          color: Colors.white60,
+                        );
+                      },
+                    ),
+                  ),
+                  //endregion
+
+                ],
               );
             } else {
+              //region Loader
               return const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               );
+              //endregion
             }
           },
           future: isGetData ? db.getDataFromUserTable() : null,
         ),
+        //endregion
+
       ),
     );
   }
 
-
+  //region Delete Alert Box
   Future<void> deleteAlertDialogBox(index) async {
     return showDialog(
       context: context,
@@ -134,46 +196,51 @@ class _UsersListPageState extends State<UsersListPage> {
                 Icons.delete_rounded,
                 color: Colors.red,
               ),
-              Text('Alert', style: TextStyle(fontWeight: FontWeight.bold),),
+              Text(
+                'Alert',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
-          content: Text("Are you sure want to delete."),
+          content: const Text("Are you sure want to delete."),
           actions: [
+            //region Confirm Delete
             TextButton(
-              child: Text('Yes', style: TextStyle(fontWeight: FontWeight.w600),),
+              child: const Text(
+                'Yes',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               onPressed: () async {
-                print("::4");
-                // int deletedUserID = await db.deleteDataFromUserTable(localList[index].UserID);
-                // print("::5");
-                // if (deletedUserID > 0) {
-                //   print("::6");
-                //     searchList.removeAt(deletedUserID);
-                //   print("::7");
-                // }
-                // Navigator.of(context).pop();
-                int deletedUserID =
-                await db.deleteDataFromUserTable(localList[index].UserID);
-                if (deletedUserID > 0) {
-                  localList.removeAt(index);
-                }
+                await db.deleteDataFromUserTable(localList[index].UserID).then(
+                  (value) {
+                    localList.clear();
+                    searchList.clear();
+                    isGetData = true;
+                    setState(() {});
+                  },
+                );
+
                 Navigator.of(context).pop();
-                setState(() {
-
-                });
-
-
-                print("::8");
               },
             ),
+            //endregion
+
+            //region Not Delete
             TextButton(
-              child: Text('No', style: TextStyle(fontWeight: FontWeight.w600),),
+              child: const Text(
+                'No',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
+            //endregion
+
           ],
         );
       },
     );
   }
+//endregion
 }

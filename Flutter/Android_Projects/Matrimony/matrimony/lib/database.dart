@@ -1,11 +1,15 @@
+//region Imports Statements
 import 'dart:io';
 import 'package:matrimony/Model/new_user_model.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+//endregion
 
 class MatrimonyDatabase {
+
+  //region Database Connection & Copy Root File
   Future<Database> initDatabase() async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String databasePath = join(appDocDir.path, 'matrimony.db');
@@ -27,7 +31,9 @@ class MatrimonyDatabase {
       await new File(path).writeAsBytes(bytes);
     }
   }
+  //endregion
 
+  //region Get Data From User Table
   Future<List<NewUserModel>> getDataFromUserTable() async {
     List<NewUserModel> userModelList = [];
     Database db = await initDatabase();
@@ -44,7 +50,26 @@ class MatrimonyDatabase {
     }
     return userModelList;
   }
+  //endregion
 
+  //region Insert OR Update Data into User Table
+  Future<void> insertOrUpdateDataIntoUserTable ({name, city, age, userID}) async {
+    Database db = await initDatabase();
+    Map<String, Object?> map = Map();
+    map['Username'] = name;
+    map['City'] = city;
+    map['Age'] = age;
+
+    if(userID != -1){
+      await db.update('UsersList', map, where: 'UserID = ?', whereArgs: [userID],);
+    }
+    else{
+      await db.insert('UsersList', map);
+    }
+  }
+  //endregion
+
+  //region Delete Data From User Table
   Future<int> deleteDataFromUserTable(userID) async {
     Database db = await initDatabase();
     int deletedID =
@@ -53,7 +78,7 @@ class MatrimonyDatabase {
             where: 'UserID = ?',
             whereArgs: [userID]
         );
-
     return deletedID;
   }
+  //endregion
 }
