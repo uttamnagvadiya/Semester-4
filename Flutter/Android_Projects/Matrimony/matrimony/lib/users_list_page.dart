@@ -156,9 +156,9 @@ class _UsersListPageState extends State<UsersListPage> {
                 if (deletedUserID > 0) {
                   localList.removeAt(index);
                 }
-                Navigator.pop();
+                Navigator.of(context).pop();
                 setState(() {
-                  
+
                 });
 
 
