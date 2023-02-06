@@ -103,11 +103,19 @@ class _UsersListPageState extends State<UsersListPage> {
                         }
                         setState(() {});
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.search,
                             color: Colors.white,
                           ),
+                          suffixIcon:  _searchController.text.length > 0
+                              ? IconButton(
+                              onPressed: () {
+                                _searchController.clear();
+                                isGetData = true;
+                                setState(() {});
+                              },
+                              icon: Icon(Icons.cancel, color: Colors.grey),) : null,
                           hintText: "Search here...",
                           hintStyle: TextStyle(color: Colors.white54),
                           border: InputBorder.none),
