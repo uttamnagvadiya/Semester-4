@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:matrimony/new_user.dart';
-import 'package:matrimony/user_home_page.dart';
-import 'package:matrimony/users_list_page.dart';
+import 'package:matrimony/Database/new_user.dart';
+import 'package:matrimony/Database/user_home_page.dart';
+import 'package:matrimony/Database/users_list_page.dart';
 
 void main() {
   runApp(const MyApp());

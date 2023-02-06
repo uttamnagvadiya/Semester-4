@@ -2,9 +2,9 @@
 //region Imports Statements
 import 'package:flutter/material.dart';
 import 'package:matrimony/Model/new_user_model.dart';
-import 'package:matrimony/database.dart';
-import 'package:matrimony/new_user.dart';
-import 'package:matrimony/user_details_page.dart';
+import 'package:matrimony/Database/database.dart';
+import 'package:matrimony/Database/new_user.dart';
+import 'package:matrimony/Database/user_details_page.dart';
 //endregion
 
 class UsersListPage extends StatefulWidget {
@@ -135,7 +135,12 @@ class _UsersListPageState extends State<UsersListPage> {
                                         detailsMap: snapshot.data![index]);
                                   },
                                 ),
-                              );
+                              ).then((value){
+                                localList.clear();
+                                searchList.clear();
+                                isGetData = true;
+                                setState(() {});
+                              });
                             },
                             child: Text(
                               searchList[index].Username.toString(),

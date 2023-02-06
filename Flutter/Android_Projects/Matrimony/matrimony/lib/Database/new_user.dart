@@ -1,7 +1,7 @@
 //region Imports Statesments
 import 'package:flutter/material.dart';
 import 'package:matrimony/Model/new_user_model.dart';
-import 'package:matrimony/database.dart';
+import 'package:matrimony/Database/database.dart';
 //endregion
 
 class NewUser extends StatefulWidget {
@@ -44,9 +44,9 @@ class _NewUserState extends State<NewUser> {
               key: _formkey,
               child: Column(
                 children: [
-                  buildCustomTextFormField(hintText: "Username", icon: Icons.account_circle, controller: _nameController),
-                  buildCustomTextFormField(hintText: "Age", icon: Icons.account_circle, controller: _ageController),
-                  buildCustomTextFormField(hintText: "City", icon: Icons.account_circle, controller: _cityController),
+                  buildCustomTextFormField(hintText: "Username", icon: Icons.account_circle, controller: _nameController,keyBoardType: TextInputType.name),
+                  buildCustomTextFormField(hintText: "Age", icon: Icons.account_circle, controller: _ageController, keyBoardType: TextInputType.number),
+                  buildCustomTextFormField(hintText: "City", icon: Icons.account_circle, controller: _cityController, keyBoardType: TextInputType.name),
                   Row(
                     children: [
                       Expanded(
@@ -64,7 +64,7 @@ class _NewUserState extends State<NewUser> {
   }
 
   //region Custom Text Field
-  Widget buildCustomTextFormField ( { hintText, icon, controller,} ) {
+  Widget buildCustomTextFormField ( { hintText, icon, controller,keyBoardType} ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -86,6 +86,7 @@ class _NewUserState extends State<NewUser> {
           ),
           child: TextFormField(
             controller: controller,
+            keyboardType: keyBoardType,
             validator: ((value) {
               if (value == null || value!.trim().length == 0) {
                 return 'Please, Enter the ' + hintText;
@@ -132,7 +133,20 @@ class _NewUserState extends State<NewUser> {
                   city: _cityController.text.toString(),
                   age: _ageController.text.toString()
               );
-              Navigator.of(context).pop();
+              if (widget.model == null) {
+                Navigator.of(context).pop();
+              }
+              else{
+                NewUserModel map = NewUserModel();
+                map.UserID=widget.model!.UserID;
+                map.Username =  _nameController.text.toString();
+                map.Age = int.parse(_ageController.text.toString());
+                map.City = _cityController.text.toString();
+
+                Navigator.of(context).pop(
+                    map
+                );
+              }
             }
           });
         },
