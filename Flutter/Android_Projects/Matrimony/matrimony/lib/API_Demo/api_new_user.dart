@@ -40,21 +40,21 @@ class _ApiNewUserState extends State<ApiNewUser> {
               children: [
                 customTextField(label: "Name", controller: _nameController),
                 customTextField(label: "Designation", controller: _designationController),
-                customTextField(label: "Qualification", controller: _qulificationController),
-                Row(
-                  children: [
-                    Expanded(child: customTextField(label: "Experience", controller: _experienceController),),
-                    Expanded(child: customTextField(label: "Working since", controller: _workingController),),
-                  ],
-                ),
-                customTextField(label: "Mobile no.", controller: _mobilenoController),
-                customTextField(label: "Email address", controller: _emailController),
-                customTextField(label: "Seating location", controller: _seatingController),
-                Row(
-                  children: [
-                    Expanded(child: buildCustomButton(btnName: "Add"),),
-                  ],
-                ),
+                // customTextField(label: "Qualification", controller: _qulificationController),
+                // Row(
+                //   children: [
+                //     Expanded(child: customTextField(label: "Experience", controller: _experienceController),),
+                //     Expanded(child: customTextField(label: "Working since", controller: _workingController),),
+                //   ],
+                // ),
+                // customTextField(label: "Mobile no.", controller: _mobilenoController),
+                // customTextField(label: "Email address", controller: _emailController),
+                // customTextField(label: "Seating location", controller: _seatingController),
+                // Row(
+                //   children: [
+                //     Expanded(child: buildCustomButton(btnName: "Add"),),
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -113,15 +113,20 @@ class _ApiNewUserState extends State<ApiNewUser> {
   Future<void> insertUserIntoRestApi() async {
     final dio = Dio(); // Provide a dio instance
     final client = RestClient(dio);
-    await client.insertUsersDataIntoRestApi(
+    client.insertUserDataIntoApi(
         _nameController.text,
         _designationController.text,
-        _qulificationController.text,
-        _experienceController.text,
-        _workingController.text,
-        _mobilenoController.text,
-        _emailController.text,
-        _seatingController.text
+        // _qulificationController.text,
+        // _experienceController.text,
+        // _workingController.text,
+        // _mobilenoController.text,
+        // _emailController.text,
+        // _seatingController.text
+    ).then(
+          (value) {
+        print(value.toString());
+      },
     );
+
   }
 }

@@ -26,7 +26,9 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => const ApiNewUser(),
+                        builder: (context) {
+                          return ApiNewUser();
+                        },
                     ),
                   ).then((value) {
                     if (value == 1){

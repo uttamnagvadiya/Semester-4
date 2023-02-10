@@ -12,14 +12,14 @@ abstract class RestClient {
 
   @POST("/FacultyProject")
   @FormUrlEncoded()
-  Future<String> insertUsersDataIntoRestApi(
+  Future<String> insertUserDataIntoApi(
         @Field('FacultyName') name,
         @Field('FacultyDesignation') designation,
-        @Field('FacultyQualification') qualification,
-        @Field('FacultyExperience') experience,
-        @Field('FacultyWorkingSince') working,
-        @Field('FacultyMobileNumber') mobilenumber,
-        @Field('FacultyEmail') email,
-        @Field('FacultySeating') seating,
+        // @Field('FacultyQualification') qualification,
+        // @Field('FacultyExperience') experience,
+        // @Field('FacultyWorkingSince') working,
+        // @Field('FacultyMobileNumber') mobilenumber,
+        // @Field('FacultyEmail') email,
+        // @Field('FacultySeating') seating,
       );
 }
