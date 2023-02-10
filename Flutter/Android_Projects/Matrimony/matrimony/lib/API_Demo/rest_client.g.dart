@@ -46,6 +46,12 @@ class _RestClient implements RestClient {
   Future<String> insertUserDataIntoApi(
     name,
     designation,
+    qualification,
+    experience,
+    working,
+    mobilenumber,
+    email,
+    seating,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -53,6 +59,12 @@ class _RestClient implements RestClient {
     final _data = {
       'FacultyName': name,
       'FacultyDesignation': designation,
+      'FacultyQualification': qualification,
+      'FacultyExperience': experience,
+      'FacultyWorkingSince': working,
+      'FacultyMobileNumber': mobilenumber,
+      'FacultyEmail': email,
+      'FacultySeating': seating,
     };
     final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
       method: 'POST',

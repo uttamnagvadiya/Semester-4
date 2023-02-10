@@ -31,7 +31,7 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                         },
                     ),
                   ).then((value) {
-                    if (value == 1){
+                    if (value){
                       setState(() {});
                     }
                   });

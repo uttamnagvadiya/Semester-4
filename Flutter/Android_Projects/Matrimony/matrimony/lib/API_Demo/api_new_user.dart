@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:matrimony/API_Demo/rest_client.dart';
-import 'package:matrimony/Model/API%20Models/user_list_model.dart';
 
 class ApiNewUser extends StatefulWidget {
   const ApiNewUser({Key? key}) : super(key: key);
@@ -16,7 +13,7 @@ class _ApiNewUserState extends State<ApiNewUser> {
 
   var _nameController = TextEditingController(),
       _designationController = TextEditingController(),
-      _qulificationController = TextEditingController(),
+      _qualificationController = TextEditingController(),
       _experienceController = TextEditingController(),
       _workingController = TextEditingController(),
       _mobilenoController = TextEditingController(),
@@ -30,7 +27,7 @@ class _ApiNewUserState extends State<ApiNewUser> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("New Uer"),
+          title: Text("New User"),
         ),
 
         body: SingleChildScrollView(
@@ -40,21 +37,21 @@ class _ApiNewUserState extends State<ApiNewUser> {
               children: [
                 customTextField(label: "Name", controller: _nameController),
                 customTextField(label: "Designation", controller: _designationController),
-                // customTextField(label: "Qualification", controller: _qulificationController),
-                // Row(
-                //   children: [
-                //     Expanded(child: customTextField(label: "Experience", controller: _experienceController),),
-                //     Expanded(child: customTextField(label: "Working since", controller: _workingController),),
-                //   ],
-                // ),
-                // customTextField(label: "Mobile no.", controller: _mobilenoController),
-                // customTextField(label: "Email address", controller: _emailController),
-                // customTextField(label: "Seating location", controller: _seatingController),
-                // Row(
-                //   children: [
-                //     Expanded(child: buildCustomButton(btnName: "Add"),),
-                //   ],
-                // ),
+                customTextField(label: "Qualification", controller: _qualificationController),
+                Row(
+                  children: [
+                    Expanded(child: customTextField(label: "Experience", controller: _experienceController),),
+                    Expanded(child: customTextField(label: "Working since", controller: _workingController),),
+                  ],
+                ),
+                customTextField(label: "Mobile no.", controller: _mobilenoController),
+                customTextField(label: "Email address", controller: _emailController),
+                customTextField(label: "Seating location", controller: _seatingController),
+                Row(
+                  children: [
+                    Expanded(child: buildCustomButton(btnName: "Add"),),
+                  ],
+                ),
               ],
             ),
           ),
@@ -97,7 +94,7 @@ class _ApiNewUserState extends State<ApiNewUser> {
         onPressed: () {
             if (_formkey.currentState!.validate()) {
               insertUserIntoRestApi();
-              Navigator.of(context).pop(1);
+              Navigator.of(context).pop(true);
             }
         },
         child: Text(btnName,
@@ -116,14 +113,13 @@ class _ApiNewUserState extends State<ApiNewUser> {
     client.insertUserDataIntoApi(
         _nameController.text,
         _designationController.text,
-        // _qulificationController.text,
-        // _experienceController.text,
-        // _workingController.text,
-        // _mobilenoController.text,
-        // _emailController.text,
-        // _seatingController.text
-    ).then(
-          (value) {
+        _qualificationController.text,
+        _experienceController.text,
+        _workingController.text,
+        _mobilenoController.text,
+        _emailController.text,
+        _seatingController.text,
+    ).then((value) {
         print(value.toString());
       },
     );
