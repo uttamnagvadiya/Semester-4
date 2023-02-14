@@ -27,17 +27,7 @@ class _SimpleInterestState extends State<SimpleInterest> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-              title: const Center(
-                child: Text("Simple Interest",
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.tealAccent,
-                  )
-                ),
-              )
-          ),
+
           body: SingleChildScrollView(
             child: Column(
               children: [

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myfirst_application/birthday_card.dart';
-import 'package:myfirst_application/home.dart';
-import 'package:myfirst_application/screen1_page.dart';
+import 'package:myfirst_application/Screens/screen2_page.dart';
 import 'package:myfirst_application/home_page.dart';
-import 'package:myfirst_application/images_part.dart';
-import 'package:myfirst_application/matrimony.dart';
-import 'package:myfirst_application/screen2_page.dart';
-import 'package:myfirst_application/simple_interest.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: HomePage(),
     );
   }
 }

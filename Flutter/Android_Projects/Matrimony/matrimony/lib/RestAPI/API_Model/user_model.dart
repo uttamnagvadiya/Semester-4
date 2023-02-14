@@ -1,4 +1,5 @@
-import 'package:matrimony/Model/API%20Models/user_list_item.dart';
+
+import 'package:matrimony/RestAPI/API_Model/UserListItem.dart';
 
 class UserListModel{
   List<UserListItem>? _resultList;

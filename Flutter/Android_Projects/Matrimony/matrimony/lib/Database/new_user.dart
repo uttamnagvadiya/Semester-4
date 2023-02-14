@@ -88,7 +88,7 @@ class _NewUserState extends State<NewUser> {
             controller: controller,
             keyboardType: keyBoardType,
             validator: ((value) {
-              if (value == null || value!.trim().length == 0) {
+              if (value == null || value.trim().length == 0) {
                 return 'Please, Enter the ' + hintText;
               }
             }),

@@ -14,50 +14,6 @@ class _BankHomePageState extends State<BankHomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          actions: [
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.only(left: 10),
-                alignment: Alignment.centerLeft,
-                child: const Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            PopupMenuButton(
-                itemBuilder: (context){
-                  return [
-                    const PopupMenuItem<int>(
-                      value: 0,
-                      child: Text("My Account"),
-                    ),
-
-                    const PopupMenuItem<int>(
-                      value: 1,
-                      child: Text("Settings"),
-                    ),
-
-                    const PopupMenuItem<int>(
-                      value: 2,
-                      child: Text("Logout"),
-                    ),
-                  ];
-                },
-                onSelected:(value){
-                  if(value == 0){
-                    print("My account menu is selected.");
-                  }else if(value == 1){
-                    print("Settings menu is selected.");
-                  }else if(value == 2){
-                    print("Logout menu is selected.");
-                  }
-                }
-            ),
-          ],
-        ),
         body: Column(
           children: [
             Expanded(
@@ -174,7 +130,7 @@ class _BankHomePageState extends State<BankHomePage> {
       child: Container(
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(15),
           ),
           color: Colors.deepOrangeAccent,
           margin:

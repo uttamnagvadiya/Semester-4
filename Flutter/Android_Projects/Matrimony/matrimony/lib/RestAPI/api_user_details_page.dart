@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:matrimony/Model/API%20Models/user_list_item.dart';
+import 'package:matrimony/RestAPI/API_Model/UserListItem.dart';
+import 'package:matrimony/RestAPI/api_new_user.dart';
 
 class ApiUserDetailsPage extends StatefulWidget {
   ApiUserDetailsPage({
@@ -14,12 +15,33 @@ class ApiUserDetailsPage extends StatefulWidget {
 
 class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           title: Text("Profile"),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ApiNewUser(data: widget.userDetails);
+                    },
+                  ),
+                ).then((value) {
+                  // print( (value as UserListItem).Age);
+                  setState(() {
+                    widget.userDetails = value;
+                  });
+                });
+              },
+              icon: const Icon(
+                Icons.edit,
+              ),
+            ),
+          ],
         ),
         body: Center(
           child: Column(
@@ -29,7 +51,7 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
                 child: CircleAvatar(
                   radius: 90,
                   backgroundImage:
-                      NetworkImage(widget.userDetails.facultyImage.toString()),
+                  NetworkImage(widget.userDetails.facultyImage.toString()),
                 ),
               ),
               Container(
@@ -47,7 +69,7 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
                     divider(),
                     showDetailsTextBox(
                         info:
-                            widget.userDetails.facultyQualification.toString(),
+                        widget.userDetails.facultyQualification.toString(),
                         fontSize: 20.0,
                         txtColor: Colors.black54),
                     divider(),

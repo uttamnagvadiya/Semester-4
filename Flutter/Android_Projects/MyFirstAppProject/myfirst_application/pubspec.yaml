@@ -81,7 +81,17 @@ flutter:
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico-Regular.ttf
-          style: italic
-  #
+    - family: Julee
+      fonts:
+        - asset: assets/fonts/Julee-Regular.ttf
+    - family: Monofett
+      fonts:
+        - asset: assets/fonts/Monofett-Regular.ttf
+    - family: Akronim
+      fonts:
+        - asset: assets/fonts/Akronim-Regular.ttf
+    - family: Tourney
+      fonts:
+        - asset: assets/fonts/Tourney-VariableFont_wdth,wght.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

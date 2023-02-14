@@ -10,15 +10,6 @@ class _PartsWithImagesState extends State<PartsWithImages> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("My First Application",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          ),
-        ),
-        
         body: Container(
           padding: EdgeInsets.all(5),
           child: Row(

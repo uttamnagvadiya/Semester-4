@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myfirst_application/birthday_card.dart';
-import 'package:myfirst_application/home_page.dart';
-import 'package:myfirst_application/screen1_page.dart';
-import 'package:myfirst_application/screen2_page.dart';
-import 'package:myfirst_application/simple_interest.dart';
+import 'package:myfirst_application/Screens/birthday_card.dart';
+import 'package:myfirst_application/Screens/screen1_page.dart';
+import 'package:myfirst_application/Screens/screen2_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   List<Widget> screens = [
-    BirthdayCard(),BalancePage(),SimpleInterest(),BankHomePage(),
+    BirthdayCard(),BalancePage(),BankHomePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -87,22 +85,14 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined, ),
               label: "Home",
-              backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.wallet),
             label: "Wallet",
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mark_unread_chat_alt_outlined),
-            label: "Notification",
-            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Account",
-            backgroundColor: Colors.black,
           ),
         ],
         onTap: (value) {

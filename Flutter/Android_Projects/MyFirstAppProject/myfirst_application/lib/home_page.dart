@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myfirst_application/Custom%20Fonts/custom_fonts.dart';
+import 'package:myfirst_application/Parts/first.dart';
+import 'package:myfirst_application/Screens/home.dart';
+import 'package:myfirst_application/Text%20Fields/text_fields.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -8,270 +14,53 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("My First Application",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
+          title: Text("Home Page"),
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              makeCard(label: "Parts", navigateRoute: First()),
+              makeCard(label: "Screens", navigateRoute: Home()),
+              makeCard(label: "Custom Fonts", navigateRoute: CustomFonts()),
+              makeCard(label: "Text Field",  navigateRoute: TextFields()),
+              makeCard(label: "Pop Up Boxes"),
+            ],
           ),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.green,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.deepOrange,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.amber,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.pink,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.black,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.purpleAccent,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.teal,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.brown,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.greenAccent,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      color: Colors.white54,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      color: Colors.amber,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    color: Colors.green,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    color: Colors.greenAccent,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: Container(
-                                                    color: Colors.lightGreenAccent,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              )
-                          ),
-                          Expanded(
-                              child: Row()
-                          ),
-                        ],
-                      ),
-                      color: Colors.purpleAccent,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.pink,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.lightGreen,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    color: Colors.blueAccent,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  color: Colors.green,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  color: Colors.pink,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  color: Colors.grey,
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Container(
-                                                  color: Colors.lightGreenAccent,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    color: Colors.amber,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      color: Colors.tealAccent,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-          ],
-        ),
       ),
+    );
+  }
+
+  Widget makeCard({label, navigateRoute}) {
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            child: Card(
+              color: Colors.black45,
+              margin: EdgeInsets.all(15),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Text(label,
+                  style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => navigateRoute,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
