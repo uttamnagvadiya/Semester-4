@@ -113,7 +113,7 @@ class _RestClient implements RestClient {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
+    final _data = map;
     final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
       method: 'PUT',
       headers: _headers,

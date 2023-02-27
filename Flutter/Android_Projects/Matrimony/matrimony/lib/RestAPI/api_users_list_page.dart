@@ -1,9 +1,11 @@
+//region Import Statements...
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:matrimony/RestAPI/API_Model/user_model.dart';
 import 'package:matrimony/RestAPI/api_new_user.dart';
 import 'package:matrimony/RestAPI/api_user_details_page.dart';
 import 'package:matrimony/RestAPI/rest_client.dart';
+//endregion
 
 class ApiUsersListPage extends StatefulWidget {
   const ApiUsersListPage({Key? key}) : super(key: key);
@@ -17,6 +19,8 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
+        //region App Bar
         appBar: AppBar(
           title: const Text("Api Faculties"),
           actions: [
@@ -36,12 +40,15 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                   },
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add_circle_outline,
               ),
             ),
           ],
         ),
+        //endregion
+
+        //region Body
         body: FutureBuilder<UserListModel>(
           builder: (context, snapshot) {
             if (snapshot.data != null &&
@@ -49,6 +56,8 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                 snapshot.connectionState == ConnectionState.done) {
               return ListView.builder(
                   itemBuilder: (context, index) {
+
+                    //region Tile
                     return ListTile(
                       minLeadingWidth: 0,
                       contentPadding: const EdgeInsets.all(6),
@@ -61,6 +70,7 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                       ),
                       //endregion
 
+                      //region Content
                       //region Name
                       title: Text(
                         snapshot.data!.resultList![index].facultyName
@@ -81,7 +91,9 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                         ),
                       ),
                       //endregion
+                      //endregion
 
+                      //region Trailing
                       trailing: IconButton(
                         onPressed: () {
                           deleteAlertDialogBox(
@@ -92,19 +104,26 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
                           color: Colors.red,
                         ),
                       ),
+                      //endregion
 
+                      //region Tap Event
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) {
                               return ApiUserDetailsPage(
                                   userDetails:
-                                      snapshot.data!.resultList![index]);
+                                      snapshot.data!.resultList![index]
+                              );
                             },
                           ),
-                        );
+                        ).then((value) {
+                          setState(() {});
+                        });
                       },
+                      //endregion
                     );
+                    //endregion
                   },
                   itemCount: snapshot.data!.resultList!.length);
             } else {
@@ -113,10 +132,12 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
           },
           future: getUsersDataFromRestApi(),
         ),
+        //endregion
       ),
     );
   }
 
+  //region Delete Alert Box
   Future<void> deleteAlertDialogBox(id) async {
     return showDialog(
       context: context,
@@ -169,7 +190,9 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
       },
     );
   }
+  //endregion
 
+  //region Get Data from Rest API
   Future<UserListModel> getUsersDataFromRestApi() async {
     final dio = Dio(); // Provide a dio instance
     final client = RestClient(dio);
@@ -177,10 +200,13 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
         UserListModel.fromJson(await client.getUsersDataFromRestApi());
     return data;
   }
+  //endregion
 
+  //region Delete Data Into Rest API
   Future<void> deleteUserIntoApi(id) async {
     final dio = Dio(); // Provide a dio instance
     final client = RestClient(dio);
     await client.deleteUserDataIntoApi(id);
   }
+  //endregion
 }

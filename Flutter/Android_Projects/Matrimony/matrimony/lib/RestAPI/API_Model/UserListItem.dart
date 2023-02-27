@@ -13,6 +13,8 @@ import 'dart:convert';
 UserListItem userListItemFromJson(String str) => UserListItem.fromJson(json.decode(str));
 String userListItemToJson(UserListItem data) => json.encode(data.toJson());
 class UserListItem {
+  // String? facultyName,facultyDesignation,facultyQualification,facultyExperience,facultyWorkingSince,
+  // facultyMobileNumber,facultyEmail,facultySeating;
   UserListItem({
       String? facultyName,
       String? facultyDesignation, 
@@ -34,7 +36,7 @@ class UserListItem {
     _facultySeating = facultySeating;
     _facultyImage = facultyImage;
     _id = id;
-}
+  }
 
   UserListItem.fromJson(dynamic json) {
     _facultyName = json['FacultyName'];

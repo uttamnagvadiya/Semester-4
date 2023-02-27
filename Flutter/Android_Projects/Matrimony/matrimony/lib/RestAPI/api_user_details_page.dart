@@ -1,12 +1,18 @@
+//region Import Statements...
 import 'package:flutter/material.dart';
 import 'package:matrimony/RestAPI/API_Model/UserListItem.dart';
 import 'package:matrimony/RestAPI/api_new_user.dart';
+//endregion
 
 class ApiUserDetailsPage extends StatefulWidget {
+
+  //region Constructor
   ApiUserDetailsPage({
     Key? key,
     required this.userDetails,
   }) : super(key: key);
+  //endregion
+
   UserListItem userDetails;
 
   @override
@@ -19,6 +25,8 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
+        //region App Bar
         appBar: AppBar(
           title: Text("Profile"),
           actions: [
@@ -43,92 +51,129 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
             ),
           ],
         ),
-        body: Center(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(20),
-                child: CircleAvatar(
-                  radius: 90,
-                  backgroundImage:
-                  NetworkImage(widget.userDetails.facultyImage.toString()),
-                ),
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    showDetailsTextBox(
-                      info: widget.userDetails.facultyName.toString(),
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    showDetailsTextBox(
-                        info: widget.userDetails.facultyDesignation.toString(),
-                        fontWeight: FontWeight.w700,
-                        txtColor: Colors.red),
-                    divider(),
-                    showDetailsTextBox(
-                        info:
-                        widget.userDetails.facultyQualification.toString(),
-                        fontSize: 20.0,
-                        txtColor: Colors.black54),
-                    divider(),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [
-                              showDetailsTextBox(
-                                info: "Experience",
-                                fontWeight: FontWeight.w800,
-                              ),
-                              showDetailsTextBox(
-                                info: widget.userDetails.facultyExperience
-                                    .toString(),
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                txtColor: Colors.blueAccent,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              showDetailsTextBox(
-                                info: "Working Since",
-                                fontWeight: FontWeight.w800,
-                              ),
-                              showDetailsTextBox(
-                                info: widget.userDetails.facultyWorkingSince
-                                    .toString(),
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                                txtColor: Colors.grey,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    divider(),
-                    customListTile(info: "+91 - ${widget.userDetails.facultyMobileNumber.toString()}", icon: Icons.call),
-                    customListTile(info: widget.userDetails.facultyEmail.toString(), icon: Icons.email),
-                    customListTile(info: widget.userDetails.facultySeating.toString(), icon: Icons.location_on),
+        //endregion
 
-                  ],
+        //region Body
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+
+                //region Image
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: CircleAvatar(
+                    radius: 90,
+                    backgroundImage:
+                    NetworkImage(widget.userDetails.facultyImage.toString()),
+                  ),
                 ),
-              ),
-            ],
+                //endregion
+
+                //region Data
+                Container(
+                  child: Column(
+                    children: [
+
+                      //region Name
+                      showDetailsTextBox(
+                        info: widget.userDetails.facultyName.toString(),
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                      ),//endregion
+
+                      //region Designation
+                      showDetailsTextBox(
+                          info: widget.userDetails.facultyDesignation.toString(),
+                          fontWeight: FontWeight.w700,
+                          txtColor: Colors.red,
+                      ),//endregion
+
+                      divider(),
+
+                      //region Qualification
+                      showDetailsTextBox(
+                          info:
+                          widget.userDetails.facultyQualification.toString(),
+                          fontSize: 20.0,
+                          txtColor: Colors.black54,
+                      ),//endregion
+
+                      divider(),
+
+                      //region Experience & Working Since
+                      Row(
+                        children: [
+
+                          //region Experience
+                          Expanded(
+                            child: Column(
+                              children: [
+                                showDetailsTextBox(
+                                  info: "Experience",
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                showDetailsTextBox(
+                                  info: widget.userDetails.facultyExperience
+                                      .toString(),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  txtColor: Colors.blueAccent,
+                                ),
+                              ],
+                            ),
+                          ),
+                          //endregion
+
+                          //region Working Since
+                          Expanded(
+                            child: Column(
+                              children: [
+                                showDetailsTextBox(
+                                  info: "Working Since",
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                showDetailsTextBox(
+                                  info: widget.userDetails.facultyWorkingSince
+                                      .toString(),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  txtColor: Colors.grey,
+                                ),
+                              ],
+                            ),
+                          ),
+                          //endregion
+
+                        ],
+                      ),
+                      //endregion
+
+                      divider(),
+
+                      //region Mobile No. & Email Address & Seating
+                      customListTile(info: "+91 - ${widget.userDetails.facultyMobileNumber.toString()}", icon: Icons.call),
+                      customListTile(info: widget.userDetails.facultyEmail.toString(), icon: Icons.email),
+                      customListTile(info: widget.userDetails.facultySeating.toString(), icon: Icons.location_on),
+                      //endregion
+
+                    ],
+                  ),
+                ),
+                //endregion
+              ],
+            ),
           ),
         ),
+        //endregion
       ),
     );
   }
 
+  //region Details Box
   Widget showDetailsTextBox({info, txtColor, fontWeight, fontSize, bgColor}) {
     return Container(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: 8),
       child: Text(
         info,
         style: TextStyle(
@@ -140,7 +185,9 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
       ),
     );
   }
+  //endregion
 
+  //region Divider
   Widget divider() {
     return const Divider(
       color: Colors.black26,
@@ -150,7 +197,9 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
       endIndent: 20,
     );
   }
+  //endregion
 
+  //region Custom Tile
   Widget customListTile ({icon, info}) {
     return ListTile(
       iconColor: Colors.black,
@@ -160,4 +209,5 @@ class _ApiUserDetailsPageState extends State<ApiUserDetailsPage> {
       title: Text(info),
     );
   }
+  //endregion
 }
