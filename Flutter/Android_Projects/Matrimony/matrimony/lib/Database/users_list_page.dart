@@ -35,36 +35,6 @@ class _UsersListPageState extends State<UsersListPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0x42424040),
-
-        //region App Bar
-        appBar: AppBar(
-          backgroundColor: Color(0x42424040),
-          title: const Text("Profiles"),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return NewUser(
-                        model: null,
-                      );
-                    },
-                  ),
-                ).then((value) {
-                    localList.clear();
-                    searchList.clear();
-                    isGetData = true;
-                    setState(() {});
-                  },
-                );
-              },
-              icon: const Icon(Icons.add),
-            ),
-          ],
-        ),
-        //endregion
-
         //region Body
         body: FutureBuilder<List<NewUserModel>>(
           builder: (context, snapshot) {
@@ -194,6 +164,34 @@ class _UsersListPageState extends State<UsersListPage> {
             }
           },
           future: isGetData ? db.getDataFromUserTable() : null,
+        ),
+        //endregion
+
+        //region Floating Action Button
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          child: const Icon(
+            Icons.add,
+            size: 35,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return NewUser(
+                    model: null,
+                  );
+                },
+              ),
+            ).then((value) {
+              localList.clear();
+              searchList.clear();
+              isGetData = true;
+              setState(() {});
+            },
+            );
+          },
         ),
         //endregion
 

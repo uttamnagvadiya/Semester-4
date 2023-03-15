@@ -20,34 +20,6 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
     return SafeArea(
       child: Scaffold(
 
-        //region App Bar
-        appBar: AppBar(
-          title: const Text("Api Faculties"),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ApiNewUser(data: null);
-                    },
-                  ),
-                ).then(
-                  (value) {
-                    if (value) {
-                      setState(() {});
-                    }
-                  },
-                );
-              },
-              icon: const Icon(
-                Icons.add_circle_outline,
-              ),
-            ),
-          ],
-        ),
-        //endregion
-
         //region Body
         body: FutureBuilder<UserListModel>(
           builder: (context, snapshot) {
@@ -131,6 +103,32 @@ class _ApiUsersListPageState extends State<ApiUsersListPage> {
             }
           },
           future: getUsersDataFromRestApi(),
+        ),
+        //endregion
+
+        //region Floating Action Button
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          child: const Icon(
+            Icons.add,
+            size: 35,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return ApiNewUser(data: null);
+                },
+              ),
+            ).then(
+                  (value) {
+                if (value) {
+                  setState(() {});
+                }
+              },
+            );
+          },
         ),
         //endregion
       ),

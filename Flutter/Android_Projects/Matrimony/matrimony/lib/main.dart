@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
-import 'package:matrimony/Database/new_user.dart';
-import 'package:matrimony/Database/user_home_page.dart';
 import 'package:matrimony/Database/users_list_page.dart';
 import 'package:matrimony/RestAPI/api_users_list_page.dart';
 
@@ -31,7 +27,60 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  ApiUsersListPage(),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            title: const Text(
+              "Profiles",
+            ),
+            backgroundColor: Color(0x95242424),
+            bottom: const TabBar(
+              unselectedLabelColor: Colors.white70,
+              indicatorColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              tabs: [
+                Tab(
+                  child: Text(
+                    "Database",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    "RestAPI",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          body: const TabBarView(
+            children: [UsersListPage(), ApiUsersListPage()],
+          ),
+        ),
+      ),
     );
   }
 }
