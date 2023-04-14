@@ -16,7 +16,7 @@ class NotesDatabase{
     );
   }
 
-  Future<void> copyPasteAssetFileToRoot() async {
+  Future<bool> copyPasteAssetFileToRoot() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "notes.db");
 
@@ -26,7 +26,9 @@ class NotesDatabase{
       List<int> bytes =
       data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await new File(path).writeAsBytes(bytes);
+      return true;
     }
+    return false;
   }
   //endregion
 
@@ -44,6 +46,7 @@ class NotesDatabase{
 
       notesList.add(model);
     }
+    print(data.length);
     return notesList;
   }
 
