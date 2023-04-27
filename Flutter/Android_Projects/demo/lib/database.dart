@@ -1,6 +1,9 @@
 //region IMPORT STATEMENTS...
+import 'dart:convert';
 import 'dart:io';
 import 'package:demo/college_model.dart';
+import 'package:demo/main.dart';
+import 'package:demo/update_database.dart';
 import 'package:path/path.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -92,10 +95,10 @@ class ArchitectureDatabase {
       ArchitectureCollegeModel model = ArchitectureCollegeModel();
 
       model.board = data[i]['Board'].toString();
-      model.openClosingRank = data[i]['OpenClosingRank'].toString();
-      model.sebcClosingRank = data[i]['SebcClosingRank'].toString();
-      model.scClosingRank = data[i]['SCClosingRank'].toString();
-      model.stClosingRank = data[i]['STClosingRank'].toString();
+      model.openClosingRank = (data[i]['OpenClosingRank'].toString() != 'null' || data[i]['OpenClosingRank'].toString().trim() == '') ? (data[i]['OpenClosingRank'].toString() == '999999' ? 'Vac.' : data[i]['OpenClosingRank'].toString()) : '--';
+      model.sebcClosingRank = (data[i]['SebcClosingRank'].toString() != 'null' || data[i]['SebcClosingRank'].toString().trim() == '') ? (data[i]['SebcClosingRank'].toString() == '999999' ? 'Vac.' : data[i]['SebcClosingRank'].toString()) : '--';
+      model.scClosingRank = (data[i]['SCClosingRank'].toString() != 'null' || data[i]['SCClosingRank'].toString().trim() == '') ? (data[i]['SCClosingRank'].toString() == '999999' ? 'Vac.' : data[i]['SCClosingRank'].toString()) : '--';
+      model.stClosingRank = (data[i]['STClosingRank'].toString() != 'null' || data[i]['STClosingRank'].toString().trim() == '') ? (data[i]['STClosingRank'].toString() == '999999' ? 'Vac.' : data[i]['STClosingRank'].toString()) : '--';
       collegeCutoff.add(model);
     }
     return collegeCutoff;
@@ -107,7 +110,10 @@ class ArchitectureDatabase {
     print(data);
   }
   
-  Future<void> deleteData () async {
+  Future<void> deleteData ({queryList}) async {
+
+    List data = jsonDecode(queryList);
+
     Database db = await initDatabase();
     db.delete("BankBranch",);
     db.delete("HelpCenter",);
@@ -122,5 +128,9 @@ class ArchitectureDatabase {
     db.delete("MST_University",);
     db.delete("MST_Website",);
     db.delete("Scholarship",);
+
+    for (int i=0; i<data.length; i++){
+      db.execute(data[i]['Query']);
+    }
   }
 }
