@@ -10,19 +10,19 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-      const Duration(seconds: 4),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const CollegeList(),
-        ),
-      ),
-    );
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Timer(
+  //     const Duration(seconds: 4),
+  //     () => Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => const CollegeList(),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,29 +37,43 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset("assets/images/bg_splash_architecture.png", fit: BoxFit.fill,),
-                  Container(color: const Color(0x78AB00AB),),
+                  Image.asset(
+                    'assets/images/bg3.jpg',
+                    fit: BoxFit.fill,
+                  ),
                   Container(
-                    margin: EdgeInsets.only(bottom: screenHeight * 0.3),
-                    child: Center(
-                      child: Image.asset(
-                        "assets/images/logo_architecture.png",
-                        height: screenHeight * 0.17,
-                        width: screenWidth * 0.35,
-                        filterQuality: FilterQuality.high,
+                    alignment: Alignment.topCenter,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(15),
+                            color: Colors.black54,
+                            child: const Text('Devloped by Uttam Nagvadiya',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                                textAlign: TextAlign.center),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: Colors.black26,
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      color: Colors.white54,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          customImageContainer(imgPath: "assets/images/logo_du.png", imgHeight: screenHeight * 0.08,),
+                          customImageContainer(imgPath: "assets/images/logo_aswdc-removebg-preview.png", imgHeight: screenHeight * 0.1,),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  customImageContainer(imgPath: "assets/images/logo_du.png", imgHeight: screenHeight * 0.08,),
-                  customImageContainer(imgPath: "assets/images/logo_aswdc.png", imgHeight: screenHeight * 0.1,),
                 ],
               ),
             ),
