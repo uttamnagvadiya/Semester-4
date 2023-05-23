@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myfirst_application/Alert%20Dialog%20Box/alert_dialog_box.dart';
 import 'package:myfirst_application/Custom%20Fonts/custom_fonts.dart';
+import 'package:myfirst_application/Loaders/loaders.dart';
 import 'package:myfirst_application/Parts/first.dart';
 import 'package:myfirst_application/Screens/home.dart';
 import 'package:myfirst_application/Text%20Fields/text_fields.dart';
@@ -26,7 +28,8 @@ class _HomePageState extends State<HomePage> {
               makeCard(label: "Screens", navigateRoute: Home()),
               makeCard(label: "Custom Fonts", navigateRoute: CustomFonts()),
               makeCard(label: "Text Field",  navigateRoute: TextFields()),
-              makeCard(label: "Pop Up Boxes"),
+              makeCard(label: "Alert Dialog Boxes", navigateRoute: AlertDialogBoxes()),
+              makeCard(label: 'Loaders', navigateRoute: CustomLoaders()),
             ],
           ),
         ),
@@ -41,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           child: InkWell(
             child: Card(
               color: Colors.black45,
-              margin: EdgeInsets.all(15),
+              margin: EdgeInsets.all(10),
               child: Container(
                 padding: EdgeInsets.all(10),
                 child: Text(label,
