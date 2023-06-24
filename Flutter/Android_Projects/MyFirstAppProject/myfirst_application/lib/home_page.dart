@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myfirst_application/Alert%20Dialog%20Box/alert_dialog_box.dart';
 import 'package:myfirst_application/Custom%20Fonts/custom_fonts.dart';
 import 'package:myfirst_application/Loaders/loaders.dart';
+import 'package:myfirst_application/Navigation%20Animation/navigation.dart';
 import 'package:myfirst_application/Parts/first.dart';
 import 'package:myfirst_application/Screens/home.dart';
 import 'package:myfirst_application/Text%20Fields/text_fields.dart';
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
               makeCard(label: "Text Field",  navigateRoute: TextFields()),
               makeCard(label: "Alert Dialog Boxes", navigateRoute: AlertDialogBoxes()),
               makeCard(label: 'Loaders', navigateRoute: CustomLoaders()),
+              makeCard(label: 'Screen Navigation Animation', navigateRoute: Navigation()),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:demo/college_list.dart';
+import 'package:demo/kishan.dart';
 import 'package:demo/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreenPage(),
+      home: const Kishan(),
     );
   }
 }
