@@ -28,7 +28,6 @@ void main(List<String> args) {
         break;
       case 6:
         exit(0);
-        break;
       default:
     }
   }
@@ -92,7 +91,7 @@ class PhonebookDictionary {
     String? name, searchChoice;
     int? mobile_no;
 
-    stdout.write("You want to search by Name / Number : ");
+    stdout.write("You want to search by Name or Number : ");
     searchChoice = stdin.readLineSync()!;
 
     if (searchChoice.toLowerCase() == 'name') {
