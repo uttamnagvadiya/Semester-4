@@ -33,17 +33,20 @@ class _AlertDialogBoxesState extends State<AlertDialogBoxes> {
   }
 
   Widget getButton (btnName, type) {
-    return Row(
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: (){
-              getAlertBox(type, btnName);
-            },
-            child: Text(btnName),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: (){
+                getAlertBox(type, btnName);
+              },
+              child: Text(btnName),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

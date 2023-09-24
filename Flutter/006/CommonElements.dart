@@ -1,45 +1,20 @@
-import 'dart:io';
+List<dynamic> findCommonElements(List<dynamic> list1, List<dynamic> list2) {
+  List<dynamic> commonElements = [];
 
-void main(List<String> args) {
-  CommonElements ce = CommonElements();
-  ce.getElements();
-  ce.checkCommonElements();
-  ce.displayLists();
+  for (var element in list1) {
+    if (list2.contains(element)) {
+      commonElements.add(element);
+    }
+  }
+
+  return commonElements;
 }
 
-class CommonElements {
-  List list1 = [];
-  List list2 = [];
-  List common = [];
+void main(List<String> args) {
+  List<dynamic> list1 = [1, 2, 3, 4, 5];
+  List<dynamic> list2 = [4, 5, 6, 5, 9, 7, 8, 3, 4];
 
-  getElements() {
-    for (var i = 0; i < 10; i++) {
-      stdout.write("Enter the Element in List 1 : ");
-      list1.add(stdin.readLineSync());
-    }
-    print("");
-    for (var i = 0; i < 10; i++) {
-      stdout.write("Enter the Element in List 2 : ");
-      list2.add(stdin.readLineSync());
-    }
-  }
+  List<dynamic> commonElements = findCommonElements(list1, list2);
 
-  checkCommonElements() {
-    for (var i = 0; i < list1.length; i++) {
-      if (list2
-          .toString()
-          .toLowerCase()
-          .contains(list1[i].toString().toLowerCase())) {
-        common.add(list1[i]);
-      }
-    }
-  }
-
-  displayLists() {
-    print("\nList 1 = ${list1}");
-    print("");
-    print("List 2 = ${list2}");
-    print("");
-    print("Common List  = ${common}\n");
-  }
+  print('Common Elements: $commonElements');
 }

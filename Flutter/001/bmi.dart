@@ -7,7 +7,7 @@ void main(List<String> args) {
   dynamic height = int.parse(stdin.readLineSync()!);
 
   double kilo = weight * 0.45359237;
-  double meter = height * 0.254;
+  double meter = height * 0.0254;
 
   double bmi = kilo / (meter * meter);
 

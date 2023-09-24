@@ -33,10 +33,11 @@ class _CustomFontsState extends State<CustomFonts> {
     );
   }
 
-  Widget customText ({fontFamily}) {
+  Widget customText({fontFamily}) {
     return Container(
       padding: EdgeInsets.all(15),
-      child: Text("Hello World", style: TextStyle(color: Colors.white, fontSize: 30, fontFamily: fontFamily),),
+      child: Text("Hello World", style: TextStyle(
+        color: Colors.white, fontSize: 30, fontFamily: fontFamily,),),
     );
   }
 }

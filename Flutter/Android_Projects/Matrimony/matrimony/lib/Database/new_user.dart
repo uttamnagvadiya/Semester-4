@@ -6,6 +6,7 @@ import 'package:matrimony/Database/database.dart';
 
 class NewUser extends StatefulWidget {
   late NewUserModel? model;
+
   NewUser({required this.model});
 
   @override
@@ -19,6 +20,7 @@ class _NewUserState extends State<NewUser> {
       _cityController = TextEditingController(),
       _ageController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
+
   //endregion
 
   //region InitState Method
@@ -32,6 +34,7 @@ class _NewUserState extends State<NewUser> {
     _ageController = TextEditingController(
         text: widget.model != null ? widget.model!.Age.toString() : "");
   }
+
   //endregion
 
   @override
@@ -39,7 +42,9 @@ class _NewUserState extends State<NewUser> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xff6982f8),
-
+        appBar: AppBar(
+          title: Text('Edit User'),
+        ),
         //region Body
         body: SingleChildScrollView(
           child: Form(
@@ -123,6 +128,7 @@ class _NewUserState extends State<NewUser> {
       ],
     );
   }
+
   //endregion
 
   //region Custom Button
@@ -168,5 +174,5 @@ class _NewUserState extends State<NewUser> {
       ),
     );
   }
-  //endregion
+//endregion
 }

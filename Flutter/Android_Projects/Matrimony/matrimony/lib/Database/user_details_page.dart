@@ -16,12 +16,10 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0x42424040),
 
         //region App Bar
         appBar: AppBar(
-          backgroundColor: Color(0x42424040),
-          title: Text("User Profile"),
+          title: Text("User Details"),
           actions: [
             IconButton(
               onPressed: () {
@@ -75,7 +73,9 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             textBox(label: "Name  :  ", info: widget.detailsMap.Username),
+                            SizedBox(height: 15,),
                             textBox(label: "City  :  ", info: widget.detailsMap.City),
+                            SizedBox(height: 15,),
                             textBox(label: "Age  :  ", info: widget.detailsMap.Age.toString()),
                           ],
                         ),

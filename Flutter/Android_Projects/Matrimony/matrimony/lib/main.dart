@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:matrimony/Database/users_list_page.dart';
 import 'package:matrimony/RestAPI/api_users_list_page.dart';
+import 'package:matrimony/dice.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: UsersListPage(),
     );
   }
 }

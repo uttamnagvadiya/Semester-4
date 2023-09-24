@@ -1,4 +1,3 @@
-
 //region Imports Statements
 import 'package:flutter/material.dart';
 import 'package:matrimony/Model/new_user_model.dart';
@@ -15,13 +14,13 @@ class UsersListPage extends StatefulWidget {
 }
 
 class _UsersListPageState extends State<UsersListPage> {
-
   //region Variable Declaration
   MatrimonyDatabase db = MatrimonyDatabase();
   List<NewUserModel> localList = [];
   List<NewUserModel> searchList = [];
   bool isGetData = true;
   var _searchController = TextEditingController();
+
   //endregion
 
   @override
@@ -34,7 +33,9 @@ class _UsersListPageState extends State<UsersListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0x42424040),
+        appBar: AppBar(
+          title: Text("User List"),
+        ),
         //region Body
         body: FutureBuilder<List<NewUserModel>>(
           builder: (context, snapshot) {
@@ -52,7 +53,7 @@ class _UsersListPageState extends State<UsersListPage> {
                   Container(
                     margin: EdgeInsets.fromLTRB(15, 5, 15, 10),
                     decoration: BoxDecoration(
-                      color: Color(0x92434242),
+                      color: Colors.grey.shade500,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
@@ -74,21 +75,24 @@ class _UsersListPageState extends State<UsersListPage> {
                         setState(() {});
                       },
                       decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          suffixIcon:  _searchController.text.length > 0
-                              ? IconButton(
-                              onPressed: () {
-                                _searchController.clear();
-                                isGetData = true;
-                                setState(() {});
-                              },
-                              icon: Icon(Icons.cancel, color: Colors.grey),) : null,
-                          hintText: "Search here...",
-                          hintStyle: TextStyle(color: Colors.white54),
-                          border: InputBorder.none),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                        suffixIcon: _searchController.text.length > 0
+                            ? IconButton(
+                                onPressed: () {
+                                  _searchController.clear();
+                                  isGetData = true;
+                                  setState(() {});
+                                },
+                                icon: Icon(Icons.cancel, color: Colors.grey),
+                              )
+                            : null,
+                        hintText: "Search here...",
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   //endregion
@@ -98,35 +102,30 @@ class _UsersListPageState extends State<UsersListPage> {
                     child: ListView.separated(
                       itemBuilder: (context, index) {
                         return ListTile(
-                          minLeadingWidth: 50,
-                          contentPadding: const EdgeInsets.all(0),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return UserDetailsPage(
+                                      detailsMap: snapshot.data![index]);
+                                },
+                              ),
+                            ).then((value) {
+                              localList.clear();
+                              searchList.clear();
+                              isGetData = true;
+                              setState(() {});
+                            });
+                          },
                           leading: const CircleAvatar(
                             backgroundImage:
                                 AssetImage("assets/images/nobita.jfif"),
                           ),
-                          title: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return UserDetailsPage(
-                                        detailsMap: snapshot.data![index]);
-                                  },
-                                ),
-                              ).then((value){
-                                localList.clear();
-                                searchList.clear();
-                                isGetData = true;
-                                setState(() {});
-                              });
-                            },
-                            child: Text(
-                              searchList[index].Username.toString(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                          title: Text(
+                            searchList[index].Username.toString(),
+                          ),
+                          subtitle: Text(
+                            searchList[index].City.toString(),
                           ),
                           trailing: IconButton(
                             onPressed: () {
@@ -136,21 +135,21 @@ class _UsersListPageState extends State<UsersListPage> {
                             color: Colors.red,
                           ),
                           horizontalTitleGap: 20,
+                          visualDensity: VisualDensity(
+                              vertical: VisualDensity.minimumDensity),
                         );
                       },
-
                       itemCount: searchList.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return const Divider(
                           height: 20,
                           thickness: 1,
-                          color: Colors.white60,
+                          color: Colors.black12,
                         );
                       },
                     ),
                   ),
                   //endregion
-
                 ],
               );
             } else {
@@ -169,11 +168,10 @@ class _UsersListPageState extends State<UsersListPage> {
 
         //region Floating Action Button
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.blue,
           child: const Icon(
             Icons.add,
             size: 35,
-            color: Colors.black,
           ),
           onPressed: () {
             Navigator.of(context).push(
@@ -184,17 +182,17 @@ class _UsersListPageState extends State<UsersListPage> {
                   );
                 },
               ),
-            ).then((value) {
-              localList.clear();
-              searchList.clear();
-              isGetData = true;
-              setState(() {});
-            },
+            ).then(
+              (value) {
+                localList.clear();
+                searchList.clear();
+                isGetData = true;
+                setState(() {});
+              },
             );
           },
         ),
         //endregion
-
       ),
     );
   }
@@ -251,11 +249,10 @@ class _UsersListPageState extends State<UsersListPage> {
               },
             ),
             //endregion
-
           ],
         );
       },
     );
   }
-  //endregion
+//endregion
 }

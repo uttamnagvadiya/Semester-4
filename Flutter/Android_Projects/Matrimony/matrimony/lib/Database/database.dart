@@ -19,7 +19,7 @@ class MatrimonyDatabase {
     );
   }
 
-  Future<void> copyPasteAssetFileToRoot() async {
+  Future<bool> copyPasteAssetFileToRoot() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "matrimony.db");
 
@@ -29,7 +29,9 @@ class MatrimonyDatabase {
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await new File(path).writeAsBytes(bytes);
+      return true;
     }
+    return false;
   }
   //endregion
 
